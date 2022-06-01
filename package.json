@@ -1,0 +1,19 @@
+{
+  "name": "oneavatar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "oneAvatar an api for generating avatars based on the name specified with more customisation",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "devStart": "nodemon app.js"
+  },
+  "author": "Ysn4Irix",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "joi": "^17.6.0",
+    "morgan": "^1.10.0"
+  }
+}
