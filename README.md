@@ -34,11 +34,11 @@ GET /api/v1/?size=256&background=random&bold=true&rounded=true&fullname=ysn4irix
 
 **Replacing Query Parameters**
 
-1. size : The size of the avatar either 256 or 512 <br />
-2. background : Background color of the avatar either a hex code or your can put random to get random color <br />
-3. bold : text can bold or not <br />
-4. rounded : avatar can be a circle (True) or a rectangle (false) <br />
-5. fullname : fullname of user if there is a space we subtracte first letter of the first word and the last   word otherwise we subtracte the first & second letter <br />
+1. **size** : The size of the avatar either 256 or 512 <br />
+2. **background** : Background color of the avatar either a hex code or your can put random to get random color <br />
+3. **bold** : text can bold or not <br />
+4. **rounded** : avatar can be a circle (True) or a rectangle (false) <br />
+5. **fullname** : fullname of user if there is a space we subtracte first letter of the first word and the last   word otherwise we subtracte the first & second letter <br />
 
 #### Example response
 
