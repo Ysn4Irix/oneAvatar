@@ -2,18 +2,38 @@
  * @author Ysn4Irix
  * @email ysn4irix@gmail.com
  * @create date 28-05-2022
- * @modify date 28-05-2022
+ * @modify date 15-06-2022
  * @desc [Avatar Controller]
  */
 
-const {
-  validateData
-} = require("../helpers/validations");
+const validateData = require("../helpers/validations");
 
 const getRandomColor = require("../helpers/randomColor");
+const genApikey = require("../helpers/genApikeys");
+const Apikey = require("../models/Apikey");
 
 const index = {
-  indexRouter: (req, res, next) => {
+  genApikey: async (req, res, next) => {
+    try {
+      const apikey = genApikey();
+      const key = new Apikey({
+        apikey,
+      });
+      await key.save(apikey);
+
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        message: "API KEY successfully generated 🎉",
+        response: {
+          apikey
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+  indexRouter: async (req, res, next) => {
     const {
       error
     } = validateData(req.query);
@@ -24,8 +44,18 @@ const index = {
       rounded,
       background,
       fullname,
-      bold
+      bold,
+      apikey
     } = req.query;
+
+    try {
+      const result = await Apikey.findOne({
+        apikey
+      });
+      if (!result) return next(new Error("Invalid API KEY"));
+    } catch (error) {
+      next(error);
+    }
 
     const spaceDecoded = decodeURIComponent(fullname);
     let extraction = "";

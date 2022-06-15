@@ -1,5 +1,5 @@
 <p align="center">
- <img width="200px" src="https://res.cloudinary.com/ydevcloud/image/upload/v1653937118/oneAvatar_bqcg0v.svg" align="center" alt="oneAvatar" />
+ <img width="200px" src="https://res.cloudinary.com/ydevcloud/image/upload/v1655324271/d15nkbgpquahh4c1xxjt.svg" align="center" alt="oneAvatar" />
 </p>
 
 # oneAvatar
@@ -26,10 +26,29 @@ npm start or npm run devStart
 
 ## Usage
 
+### GET your API KEY
+
+```endpoint
+GET /api/v1/generateKey
+```
+
+#### Example response
+
+```json
+{
+  "status": 200,
+  "success": true,
+  "message": "API KEY successfully generated 🎉",
+  "response": {
+    "apikey": "URDZm2pcT39AmzrMcSsw303yWJDgvAej1f4"
+  }
+}
+```
+
 ### Generating a Profile Avatar
 
 ```endpoint
-GET /api/v1/?size=256&background=random&bold=true&rounded=true&fullname=ysn4irix
+GET /api/v1/?size=256&background=random&bold=true&rounded=true&fullname=ysn4irix&apikey=URDZm2pcT39AmzrMcSsw303yWJDgvAej1f4
 ```
 
 **Replacing Query Parameters**
@@ -38,7 +57,8 @@ GET /api/v1/?size=256&background=random&bold=true&rounded=true&fullname=ysn4irix
 2. **background** : Background color of the avatar either a hex code or your can put random to get random color <br />
 3. **bold** : text can bold or not <br />
 4. **rounded** : avatar can be a circle (True) or a rectangle (false) <br />
-5. **fullname** : fullname of user if there is a space we subtracte first letter of the first word and the last   word otherwise we subtracte the first & second letter <br />
+5. **fullname** : fullname of user if there is a space we subtracte first letter of the first word and the last word otherwise we subtracte the first & second letter <br />
+6. **APIKEY** : Your API Key
 
 #### Example response
 
