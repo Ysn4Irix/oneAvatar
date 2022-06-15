@@ -4,7 +4,7 @@
 
 # oneAvatar
 
-An api for generating user profile avatars based on the name specified with more customisation
+An api for generating user profile avatars based on the name specified with more customisation build using [Node.js](https://nodejs.org/) & [MongoDB](https://mongodb.com/) (Database used for storing API Keys)
 
 Give as a Star 🌟
 
@@ -19,6 +19,7 @@ API requires [Node.js](https://nodejs.org/) v14+ to run.
 Clone, Install the dependencies and start.
 
 ```sh
+git clone https://github.com/Ysn4Irix/oneAvatar.git
 cd oneAvatar
 npm install
 npm start or npm run devStart
