@@ -59,7 +59,7 @@ GET /api/v1/?size=256&background=random&bold=true&rounded=true&fullname=ysn4irix
 3. **bold** : text can bold or not <br />
 4. **rounded** : avatar can be a circle (True) or a rectangle (false) <br />
 5. **fullname** : fullname of user if there is a space we subtracte first letter of the first word and the last word otherwise we subtracte the first & second letter <br />
-6. **APIKEY** : Your API Key
+6. **apikey** : Your API Key
 
 #### Example response
 
