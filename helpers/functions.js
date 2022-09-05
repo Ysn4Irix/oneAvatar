@@ -5,24 +5,13 @@
  * @modify date 05-09-2022
  * @desc [functions]
  */
-
-const { randomBytes } = require("crypto")
-
 module.exports = {
   generateApiKeys: () => {
-    const rand = randomBytes(35)
-
-    let chars =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".repeat(5)
-
-    let str = ""
-
-    for (let i = 0; i < rand.length; i++) {
-      let decimal = rand[i]
-      str += chars[decimal]
-    }
-
-    return str
+    return require("crypto")
+      .createHash("sha256")
+      .update(require("uuid").v4())
+      .update("salt")
+      .digest("hex")
   },
   randomColor: () => {
     let letters = "0123456789ABCDEF",
