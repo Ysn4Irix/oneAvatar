@@ -8,10 +8,6 @@ An api for generating user profile avatars based on the name specified with more
 
 Give as a Star 🌟
 
-## Demo
-
-You can find the live preview [Here](https://shortaurl.xyz/oneavatar)
-
 ## Installation
 
 API requires [Node.js](https://nodejs.org/) v14+ to run.
