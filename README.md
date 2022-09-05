@@ -45,7 +45,7 @@ GET /api/v1/generateKey
 ### Generating a Profile Avatar
 
 ```endpoint
-GET /api/v1/?size=256&background=random&bold=true&rounded=yes&fullname=ysn4irix&apikey=f5aa3361e8982df447d85fc6c629efbdbc7d7f850e2b29e41daa8944ed8c79c1
+GET /api/v1/?size=256&background=random&bold=true&rounded=yes&fullname=ysn4irix&apikey=f5aa3361e8982df447d85fc6c629efbdbc7d7f850e2b29e41daa8944ed8c79c2
 ```
 
 **Replacing Query Parameters**
