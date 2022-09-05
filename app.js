@@ -12,13 +12,9 @@ const logger = require("morgan")
 const helmet = require("helmet")
 const { connect, connection } = require("mongoose")
 const connectToDB = require("./database/db")
-const httpProxy = require("http-proxy")
 const { PORT } = process.env
 const middlewares = require("./helpers/middlewares")
 const app = express()
-
-// (Optional) A Proxy Server for just pushing my apis to my vps in a single url
-httpProxy.createProxyServer({ target: `http://localhost:${PORT}` }).listen(9696)
 
 if (process.env.NODE_ENV === "development") app.use(logger("dev"))
 app.use(helmet())
