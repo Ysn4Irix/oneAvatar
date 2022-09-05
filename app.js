@@ -2,60 +2,66 @@
  * @author Ysn4Irix
  * @email ysn4irix@gmail.com
  * @create date 28-05-2022
- * @modify date 15-06-2022
+ * @modify date 05-09-2022
  * @desc [Server Entry Point]
  */
-require("dotenv").config();
-const express = require("express");
-const logger = require("morgan");
-const helmet = require("helmet");
-const {
-  connect
-} = require("mongoose")
 
-const router = require("./routes/index");
+require("dotenv").config()
+const express = require("express")
+const logger = require("morgan")
+const helmet = require("helmet")
+const { connect, connection } = require("mongoose")
+const connectToDB = require("./database/db")
+const httpProxy = require("http-proxy")
+const { PORT } = process.env
 const middlewares = require("./helpers/middlewares")
-const app = express();
+const app = express()
 
-app.set('view engine', 'ejs');
+// (Optional) A Proxy Server for just pushing my apis to my vps in a single url
+httpProxy.createProxyServer({ target: `http://localhost:${PORT}` }).listen(9696)
 
-app.use(logger("common"));
-app.use(helmet());
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      "script-src": ["'self' unpkg.com", "'unsafe-eval'"],
-      "font-src": [
-        "'self' fonts.googleapis.com fonts.gstatic.com",
-      ],
-      "style-src": ["'self' 'unsafe-inline' fonts.googleapis.com"],
-    },
-  })
-);
+if (process.env.NODE_ENV === "development") app.use(logger("dev"))
+app.use(helmet())
 
 app.use(
   express.urlencoded({
-    extended: true,
+    extended: false,
   })
-);
+)
 
-app.use("/api/v1", router);
+connectToDB(connect, connection)
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+app.use("/api/v1", require("./routes/index"))
 
-connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+app.use(middlewares.notFound)
+app.use(middlewares.errorHandler)
+
+const server = app.listen(PORT, () => {
+  console.log(
+    `🚀 Server started => listening on PORT: ${PORT} with processId: ${process.pid}`
+  )
+})
+
+process.on("SIGINT", () => {
+  console.info("SIGINT signal received.")
+  console.log("Server is closing.")
+  server.close(() => {
+    console.log("Server closed.")
+    connection.close(false, () => {
+      process.exit(0)
+    })
   })
-  .then(() => {
-    console.log("Database Connected 🎉");
-    const port = process.env.PORT || 2222;
-    app.listen(port, () => {
-      console.log(`Listening at http://localhost:${port} 🎉`);
-    });
-  })
-  .catch((err) => console.log(err));
+})
 
-module.exports = app;
+process.on("SIGTERM", () => {
+  console.info("SIGTERM signal received.")
+  console.log("Server is closed.")
+  server.close(() => {
+    console.log("Server closed.")
+    connection.close(false, () => {
+      process.exit(0)
+    })
+  })
+})
+
+module.exports = app
