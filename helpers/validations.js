@@ -24,7 +24,7 @@ const validateData = (data) => {
     background: joi.string().min(6).max(6).required().trim().default("random"),
     fullname: joi.string().min(4).max(20).required().trim(),
     bold: joi.boolean().required(),
-    apikey: joi.string().trim().min(35).max(35).required(),
+    apikey: joi.string().trim().min(35).max(100).required(),
   })
   return schema.validate(data, options)
 }
