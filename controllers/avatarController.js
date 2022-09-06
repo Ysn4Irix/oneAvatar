@@ -2,49 +2,21 @@
  * @author Ysn4Irix
  * @email ysn4irix@gmail.com
  * @create date 28-05-2022
- * @modify date 05-09-2022
+ * @modify date 06-09-2022
  * @desc [Avatar Controller]
  */
 
 const validateData = require("../helpers/validations")
-const Apikey = require("../models/Apikey")
-const { generateApiKeys, randomColor } = require("../helpers/functions")
+const randomColor = require("../helpers/functions")
 
 const index = {
-  genApikey: async (req, res, next) => {
-    try {
-      const apikey = generateApiKeys()
-
-      const key = new Apikey({
-        apikey,
-      })
-
-      await key.save()
-
-      return res.status(200).json({
-        status: 200,
-        success: true,
-        message: "API KEY successfully generated 🎉",
-        response: {
-          apikey,
-        },
-      })
-    } catch (err) {
-      next(err)
-    }
-  },
   indexRouter: async (req, res, next) => {
     const { error } = validateData(req.query)
     if (error) return next(error)
 
-    const { size, rounded, background, fullname, bold, apikey } = req.query
+    const { size, rounded, background, fullname, bold } = req.query
 
     try {
-      const result = await Apikey.findOne({
-        apikey,
-      })
-      if (!result) return next(new Error("Invalid API KEY"))
-
       const spaceDecoded = decodeURIComponent(fullname)
       let extraction = ""
 

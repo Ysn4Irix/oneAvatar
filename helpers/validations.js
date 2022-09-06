@@ -2,7 +2,7 @@
  * @author Ysn4Irix
  * @email ysn4irix@gmail.com
  * @create date 28-05-2022
- * @modify date 05-09-2022
+ * @modify date 06-09-2022
  * @desc [Input Validations]
  */
 
@@ -23,8 +23,7 @@ const validateData = (data) => {
     rounded: joi.string().valid("yes", "no").required(),
     background: joi.string().min(6).max(6).required().trim().default("random"),
     fullname: joi.string().min(4).max(20).required().trim(),
-    bold: joi.boolean().required(),
-    apikey: joi.string().trim().min(35).max(100).required(),
+    bold: joi.string().valid("yes", "no").required(),
   })
   return schema.validate(data, options)
 }

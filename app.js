@@ -2,7 +2,7 @@
  * @author Ysn4Irix
  * @email ysn4irix@gmail.com
  * @create date 28-05-2022
- * @modify date 05-09-2022
+ * @modify date 06-09-2022
  * @desc [Server Entry Point]
  */
 
@@ -10,8 +10,6 @@ require("dotenv").config()
 const express = require("express")
 const logger = require("morgan")
 const helmet = require("helmet")
-const { connect, connection } = require("mongoose")
-const connectToDB = require("./database/db")
 const { PORT } = process.env
 const middlewares = require("./helpers/middlewares")
 const app = express()
@@ -24,8 +22,6 @@ app.use(
     extended: false,
   })
 )
-
-connectToDB(connect, connection)
 
 app.use("/api/v1", require("./routes/index"))
 
@@ -43,9 +39,7 @@ process.on("SIGINT", () => {
   console.log("Server is closing.")
   server.close(() => {
     console.log("Server closed.")
-    connection.close(false, () => {
-      process.exit(0)
-    })
+    process.exit(0)
   })
 })
 
@@ -54,9 +48,7 @@ process.on("SIGTERM", () => {
   console.log("Server is closed.")
   server.close(() => {
     console.log("Server closed.")
-    connection.close(false, () => {
-      process.exit(0)
-    })
+    process.exit(0)
   })
 })
 
