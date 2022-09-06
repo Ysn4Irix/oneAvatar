@@ -11,6 +11,9 @@ const randomColor = require("../helpers/functions")
 
 const index = {
   indexRouter: async (req, res, next) => {
+    if (req.method !== "GET")
+      return next(new Error(`${req.method} is not allowed`))
+
     const { error } = validateData(req.query)
     if (error) return next(error)
 
@@ -65,7 +68,7 @@ const index = {
         alignment-baseline="middle"
         text-anchor="middle"
         font-size="${size == 512 ? 224 : 112}"
-        font-weight="${bold == "true" ? "bold" : 600}"
+        font-weight="${bold === "yes" ? "bold" : 500}"
         dy=".1em"
         dominant-baseline="middle"
         fill="${letterRandomColor}"
